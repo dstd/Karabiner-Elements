@@ -13,6 +13,7 @@
 		34BB0F0B1D22853700372174 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BB0F0A1D22853700372174 /* IOKit.framework */; };
 		34DA28A01D8E94FB0029E37D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34DA289F1D8E94FB0029E37D /* SystemConfiguration.framework */; };
 		34E9F62F1D2134770007AE90 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E9F62E1D2134770007AE90 /* Carbon.framework */; };
+		7C52E2A81F802D4700DE592D /* inputsource_observer_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C52E2A61F802D4600DE592D /* inputsource_observer_objc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,6 +71,9 @@
 		34F4D5171E647EAD007D5065 /* configuration_monitor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = configuration_monitor.hpp; sourceTree = "<group>"; };
 		7C95EC091F7E91BE00D3E523 /* inputsources.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = inputsources.hpp; sourceTree = "<group>"; };
 		7C95EC0A1F7E91E700D3E523 /* cf_utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cf_utility.hpp; sourceTree = "<group>"; };
+		7C52E2A51F802D4600DE592D /* inputsource_observer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = inputsource_observer.hpp; sourceTree = "<group>"; };
+		7C52E2A61F802D4600DE592D /* inputsource_observer_objc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = inputsource_observer_objc.m; sourceTree = "<group>"; };
+		7C52E2A71F802D4700DE592D /* inputsource_observer_objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputsource_observer_objc.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,9 @@
 				345EF8DC1F09FA0B003E7A67 /* frontmost_application_observer.hpp */,
 				3431346F1DB710E80008F284 /* gcd_utility.hpp */,
 				34A88A981D685A4600DD480B /* grabber_client.hpp */,
+				7C52E2A71F802D4700DE592D /* inputsource_observer_objc.h */,
+				7C52E2A61F802D4600DE592D /* inputsource_observer_objc.m */,
+				7C52E2A51F802D4600DE592D /* inputsource_observer.hpp */,
 				341F59DB1D57789500B441A8 /* iokit_utility.hpp */,
 				34A88AA01D685A5C00DD480B /* karabiner_version.h */,
 				341F59D51D535D2500B441A8 /* local_datagram_client.hpp */,
@@ -232,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34A88A9F1D685A5000DD480B /* main.cpp in Sources */,
+				7C52E2A81F802D4700DE592D /* inputsource_observer_objc.m in Sources */,
 				345EF8DD1F09FA0B003E7A67 /* frontmost_application_observer_objc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

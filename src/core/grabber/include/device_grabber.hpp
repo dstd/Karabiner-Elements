@@ -221,6 +221,18 @@ public:
     });
   }
 
+  void post_inputsource_changed_event(const std::string& inputsource_id) {
+    gcd_utility::dispatch_sync_in_main_queue(^{
+      auto event = event_queue::queued_event::event::make_inputsource_changed_event(inputsource_id);
+      merged_input_event_queue_.emplace_back_event(device_id(0),
+                                                   mach_absolute_time(),
+                                                   event,
+                                                   event_type::single,
+                                                   event);
+      manipulate();
+    });
+  }
+  
 private:
   enum class mode {
     observing,

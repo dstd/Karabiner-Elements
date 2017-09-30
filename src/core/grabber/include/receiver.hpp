@@ -104,6 +104,19 @@ private:
             }
             break;
 
+          case operation_type::inputsource_changed:
+            if (n < sizeof(operation_type_inputsource_changed_struct)) {
+              logger::get_logger().error("invalid size for operation_type::inputsource_changed ({0})", n);
+            } else {
+              auto p = reinterpret_cast<operation_type_inputsource_changed_struct*>(&(buffer_[0]));
+
+              // Ensure value is null-terminated string even if corrupted data is sent.
+              p->inputsource_id[sizeof(p->inputsource_id) - 1] = '\0';
+
+              device_grabber_.post_inputsource_changed_event(p->inputsource_id);
+            }
+            break;
+
           default:
             break;
         }

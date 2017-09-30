@@ -7,6 +7,7 @@
 #include "manipulator/details/conditions/frontmost_application.hpp"
 #include "manipulator/details/conditions/nop.hpp"
 #include "manipulator/details/conditions/variable.hpp"
+#include "manipulator/details/conditions/inputsource.hpp"
 #include "manipulator/details/nop.hpp"
 #include "manipulator/details/types.hpp"
 #include <memory>
@@ -47,6 +48,9 @@ public:
         } else if (value == "variable_if" ||
                    value == "variable_unless") {
           return std::make_shared<details::conditions::variable>(json);
+        } else if (value == "inputsource_if" ||
+                   value == "inputsource_unless") {
+          return std::make_shared<details::conditions::inputsource>(json);
         } else {
           logger::get_logger().error("complex_modifications json error: unknown `type` {0} in {1}", value, json.dump());
           return std::make_shared<details::conditions::nop>();

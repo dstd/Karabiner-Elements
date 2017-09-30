@@ -33,6 +33,7 @@ public:
         caps_lock_state_changed,
         event_from_ignored_device,
         frontmost_application_changed,
+        inputsource_changed,
         set_variable,
         set_inputsource,
       };
@@ -85,6 +86,13 @@ public:
         return e;
       }
 
+      static event make_inputsource_changed_event(const std::string& inputsource_id) {
+        event e;
+        e.type_ = type::inputsource_changed;
+        e.value_ = inputsource_id;
+        return e;
+      }
+      
       static event make_set_variable_event(const std::pair<std::string, int>& pair) {
         event e;
         e.type_ = type::set_variable;
@@ -158,6 +166,13 @@ public:
         return boost::none;
       }
 
+      boost::optional<std::string> get_inputsource(void) const {
+        if (type_ == type::inputsource_changed) {
+          return boost::get<std::string>(value_);
+        }
+        return boost::none;
+      }
+      
       boost::optional<std::pair<std::string, int>> get_set_variable(void) const {
         if (type_ == type::set_variable) {
           return boost::get<std::pair<std::string, int>>(value_);
@@ -459,6 +474,9 @@ public:
         manipulator_environment_.set_frontmost_application_bundle_identifier(*bundle_identifier);
         manipulator_environment_.set_frontmost_application_file_path(*file_path);
       }
+    }
+    if (auto inputsource = event.get_inputsource()) {
+      manipulator_environment_.set_inputsource(*inputsource);
     }
     if (event_type == event_type::key_down) {
       if (auto set_variable = event.get_set_variable()) {

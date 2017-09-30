@@ -97,6 +97,14 @@ public:
     variables_[name] = value;
     save_to_file();
   }
+  
+  std::string get_inputsource() const {
+    return inputsource_;
+  }
+  
+  void set_inputsource(const std::string& inputsource) {
+    inputsource_ = inputsource;
+  }
 
 private:
   void save_to_file(void) const {
@@ -115,5 +123,6 @@ private:
   std::string output_json_file_path_;
   frontmost_application frontmost_application_;
   std::unordered_map<std::string, int> variables_;
+  std::string inputsource_;
 };
 } // namespace krbn

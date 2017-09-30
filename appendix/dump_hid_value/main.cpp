@@ -186,6 +186,10 @@ private:
                     << queued_event.get_event().get_frontmost_application_file_path() << std::endl;
           break;
 
+        case krbn::event_queue::queued_event::event::type::inputsource_changed:
+          std::cout << "inputsource_changed" << std::endl;
+          break;
+
         case krbn::event_queue::queued_event::event::type::set_variable:
           std::cout << "set_variable" << std::endl;
           break;

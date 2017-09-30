@@ -6,6 +6,13 @@
 namespace krbn {
 class inputsources final {
 public:
+  static std::string get_current() {
+    TISInputSourceRef inputsource = TISCopyCurrentKeyboardLayoutInputSource();
+    auto inputsource_id = *cf_utility::to_string((CFStringRef)TISGetInputSourceProperty(inputsource, kTISPropertyInputSourceID));
+    CFRelease(inputsource);
+    return inputsource_id;
+  }
+
   static void select(const std::string& id) {
     cf_string new_inputsource_id(id);
     auto found = false;

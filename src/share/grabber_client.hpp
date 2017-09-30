@@ -59,6 +59,16 @@ public:
     client_->send_to(reinterpret_cast<uint8_t*>(&s), sizeof(s));
   }
 
+  void inputsource_changed(const std::string& inputsource_id) {
+    operation_type_inputsource_changed_struct s;
+
+    strlcpy(s.inputsource_id,
+            inputsource_id.c_str(),
+            sizeof(s.inputsource_id));
+
+    client_->send_to(reinterpret_cast<uint8_t*>(&s), sizeof(s));
+  }
+
 private:
   std::unique_ptr<local_datagram_client> client_;
 };

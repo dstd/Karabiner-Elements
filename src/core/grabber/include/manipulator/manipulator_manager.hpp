@@ -66,6 +66,7 @@ public:
         case event_queue::queued_event::event::type::caps_lock_state_changed:
         case event_queue::queued_event::event::type::frontmost_application_changed:
         case event_queue::queued_event::event::type::set_variable:
+        case event_queue::queued_event::event::type::inputsource_changed:
           // Do nothing
           break;
 

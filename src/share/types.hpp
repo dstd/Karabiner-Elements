@@ -30,6 +30,7 @@ enum class operation_type : uint8_t {
   connect,
   system_preferences_values_updated,
   frontmost_application_changed,
+  inputsource_changed,
   // grabber -> console_user_server
   shell_command_execution,
   set_inputsource,
@@ -1088,6 +1089,13 @@ struct operation_type_frontmost_application_changed_struct {
   const operation_type operation_type;
   char bundle_identifier[256];
   char file_path[_POSIX_PATH_MAX];
+};
+
+struct operation_type_inputsource_changed_struct {
+  operation_type_inputsource_changed_struct(void) : operation_type(operation_type::inputsource_changed) {}
+
+  const operation_type operation_type;
+  char inputsource_id[256];
 };
 
 struct operation_type_shell_command_execution_struct {

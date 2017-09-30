@@ -3,6 +3,7 @@
 #include "configuration_manager.hpp"
 #include "constants.hpp"
 #include "frontmost_application_observer.hpp"
+#include "inputsource_observer.hpp"
 #include "gcd_utility.hpp"
 #include "grabber_client.hpp"
 #include "logger.hpp"
@@ -59,6 +60,11 @@ public:
                       std::bind(&connection_manager::frontmost_application_changed_callback, this, std::placeholders::_1, std::placeholders::_2));
                 }
 
+                if (!inputsource_observer_) {
+                  inputsource_observer_ = std::make_unique<inputsource_observer>(
+                      std::bind(&connection_manager::inputsource_changed_callback, this, std::placeholders::_1));
+                }
+                
                 return;
 
               } catch (std::exception& ex) {
@@ -82,6 +88,7 @@ public:
 private:
   void release(void) {
     frontmost_application_observer_ = nullptr;
+    inputsource_observer_ = nullptr;
     configuration_manager_ = nullptr;
     system_preferences_monitor_ = nullptr;
     grabber_client_ = nullptr;
@@ -122,6 +129,12 @@ private:
     }
   }
 
+  void inputsource_changed_callback(const std::string& inputsource_id) {
+    if (grabber_client_) {
+      grabber_client_->inputsource_changed(inputsource_id);
+    }
+  }
+
   version_monitor& version_monitor_;
 
   std::unique_ptr<gcd_utility::main_queue_timer> timer_;
@@ -135,5 +148,9 @@ private:
   // `frontmost_application_observer` does not work properly in karabiner_grabber after fast user switching.
   // Therefore, we have to use `frontmost_application_observer` in `console_user_server`.
   std::unique_ptr<frontmost_application_observer> frontmost_application_observer_;
+
+  // `inputsource_observer` does not work properly in karabiner_grabber due to a different user.
+  // Therefore, we have to use `inputsource_observer` in `console_user_server`.
+  std::unique_ptr<inputsource_observer> inputsource_observer_;
 };
 } // namespace krbn
